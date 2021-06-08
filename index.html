@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+    <div class="content" id="main">
+
+    </div>
+<script>
+
+    async function getFromServer(){
+        fetch('https://animechan.vercel.app/api/quotes/anime?title=naruto')
+      .then(response => response.json())
+      .then(quotes =>{
+         function createCard(anime, quote) {
+           let card = document.createElement('div');
+           card.className="col";
+           let title = document.createElement('h2');
+           title.innerText = anime;
+           let content = document.createElement('p');
+           content.innerText = quote;
+           card.appendChild(title);
+           card.appendChild(content);
+           return card;
+         }
+          quotes.map(quote =>{
+           document.getElementById('main').appendChild(createCard(quote.anime, quote.quote));     
+        }) 
+       })
+    }
+    getFromServer();
+
+    //Styling//
+   /* let st1=document.getElementById('main');
+    let st3=document.querySelectorAll('.col');
+    st1.style.display = "flex"
+    st1.style.width="150%";
+    div(nthChild(1)).style.backgroundColor = "red";*/
+</script>
+
+</body>
+</html>
